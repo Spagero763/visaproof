@@ -27,7 +27,14 @@ import {CeloAddresses} from "./CeloAddresses.sol";
 ///
 ///      Run with:
 ///        forge script script/Deploy.s.sol:Deploy \
-///          --rpc-url celo --broadcast --verify
+///          --rpc-url celo --account visaproof-deployer \
+///          --sender 0xYourDeployerAddress --broadcast --verify
+///
+///      `--sender` must match the keystore address. The script captures
+///      msg.sender before broadcasting to set the protocol owner, and the
+///      subsequent admin calls are sent from the same address. Without
+///      `--sender`, msg.sender defaults to forge's placeholder and the
+///      configure calls revert with OwnableUnauthorizedAccount.
 contract Deploy is Script {
     function run()
         external
@@ -39,6 +46,10 @@ contract Deploy is Script {
         )
     {
         address owner = msg.sender;
+        require(
+            owner != 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38,
+            "Pass --sender <your address>; forge default sender will not own the contracts"
+        );
 
         vm.startBroadcast();
 
