@@ -53,7 +53,18 @@ median rate.
 cUSD, cEUR, cREAL, USDT and USDC on Celo mainnet. The full set is configurable
 by the contract owner.
 
-## Quick start
+## Deployments
+
+Live on Celo mainnet (chain id 42220), all four contracts verified on Celoscan.
+
+| Contract | Address |
+|----------|---------|
+| `MentoPriceAdapter` | [`0x28825CB6a2D9f13947e4023317904A38Bd35dB9e`](https://celoscan.io/address/0x28825CB6a2D9f13947e4023317904A38Bd35dB9e#code) |
+| `AgentActivityOracle` | [`0x791d94586187d3239cEB0577FE02af7eb9f8eF25`](https://celoscan.io/address/0x791d94586187d3239cEB0577FE02af7eb9f8eF25#code) |
+| `AgentPassport` | [`0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3`](https://celoscan.io/address/0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3#code) |
+| `AgentVisaRegistry` | [`0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837`](https://celoscan.io/address/0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837#code) |
+
+## Local development
 
 ```bash
 forge build
@@ -62,20 +73,32 @@ forge test
 
 The suite covers the four contracts with their full branch and function set.
 
-## Deployment
+## Redeploying
 
-`script/Deploy.s.sol` deploys the stack in dependency order and wires the token
-configuration. Mainnet addresses live in `script/CeloAddresses.sol` and were
-each checked against Celo mainnet.
+`script/Deploy.s.sol` deploys the stack in dependency order and wires the
+token configuration. Mainnet addresses live in `script/CeloAddresses.sol` and
+were each checked against Celo mainnet.
 
 Dry run against mainnet without broadcasting:
 
 ```bash
-forge script script/Deploy.s.sol:Deploy --rpc-url celo
+forge script script/Deploy.s.sol:Deploy --rpc-url celo \
+  --sender 0xYourDeployerAddress
 ```
 
-Copy `.env.example` to `.env` and set your RPC URL, deployer key and Celoscan
-API key, then add `--broadcast --verify` to deploy.
+Copy `.env.example` to `.env` and set your RPC URL and Celoscan API key.
+Import your deployer key into an encrypted keystore once with
+`cast wallet import visaproof-deployer --interactive`, then deploy:
+
+```bash
+forge script script/Deploy.s.sol:Deploy --rpc-url celo \
+  --account visaproof-deployer --sender 0xYourDeployerAddress \
+  --broadcast --verify
+```
+
+`--sender` must match the keystore address: the script captures `msg.sender`
+to set the protocol owner, and the subsequent admin calls broadcast from the
+same address.
 
 Because Celo supports CIP 64 fee abstraction, the deploy and every protocol
 call can pay gas in cUSD by setting the fee currency at the transaction layer.
@@ -84,7 +107,6 @@ No contract change is needed for this.
 ## Roadmap
 
 * `@visaproof/sdk`, a TypeScript wrapper over the deployed contracts.
-* Mainnet deployment and verified source on Celoscan.
 
 ## License
 
