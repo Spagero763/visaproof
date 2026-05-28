@@ -167,15 +167,15 @@ contract AgentPassportTest is Test {
 
     function test_UpgradeTier_UpdatesPassportRecord() public {
         _register(alice, AGENT_ID);
-        oracle.setScore(AGENT_ID, 2_000e18, 250);
+        oracle.setScore(AGENT_ID, 6_000e18, 1_200);
 
         vm.warp(block.timestamp + 1 days);
         passport.upgradeTier(AGENT_ID);
 
         AgentPassport.Passport memory p = passport.getPassport(AGENT_ID);
         assertEq(uint8(p.tier), uint8(AgentPassport.Tier.WorkVisa));
-        assertEq(p.volumeCUSD, 2_000e18);
-        assertEq(p.txCount, 250);
+        assertEq(p.volumeCUSD, 6_000e18);
+        assertEq(p.txCount, 1_200);
         assertEq(p.updatedAt, block.timestamp);
     }
 

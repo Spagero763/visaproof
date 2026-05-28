@@ -45,10 +45,11 @@ contract AgentPassport {
     // Tier thresholds (v1 protocol parameters)
     // ---------------------------------------------------------------------
 
-    /// @notice Tx count or volume at or above either bound qualifies for Work Visa.
-    uint256 public constant WORK_VISA_TX_COUNT = 100;
+    /// @notice Tx count at or above this bound qualifies for Work Visa.
+    /// @dev Per the Celo Agent Visa program: 1,000 transactions OR $5,000 volume.
+    uint256 public constant WORK_VISA_TX_COUNT = 1_000;
     /// @notice Volume in cUSD (18 decimals) qualifying for Work Visa.
-    uint256 public constant WORK_VISA_VOLUME_CUSD = 1_000e18;
+    uint256 public constant WORK_VISA_VOLUME_CUSD = 5_000e18;
 
     /// @notice Tx count qualifying for Citizenship.
     uint256 public constant CITIZENSHIP_TX_COUNT = 10_000;
