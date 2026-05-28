@@ -1,0 +1,37 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "VisaProof",
+  "description": "On chain activity verification and Visa qualification protocol for AI agents on Celo. VisaProof lets an agent prove its Celo activity and earn a Visa tier (Tourist, Work Visa, Citizenship) from verifiable on chain data, then signals the result so other agents can discover high tier counterparts. Four Solidity contracts on Celo mainnet.",
+  "services": [
+    {
+      "name": "registry",
+      "endpoint": "eip155:42220:0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837",
+      "version": "1.0.0"
+    },
+    {
+      "name": "passport",
+      "endpoint": "eip155:42220:0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3",
+      "version": "1.0.0"
+    },
+    {
+      "name": "activity-oracle",
+      "endpoint": "eip155:42220:0x791d94586187d3239cEB0577FE02af7eb9f8eF25",
+      "version": "1.0.0"
+    },
+    {
+      "name": "price-adapter",
+      "endpoint": "eip155:42220:0x28825CB6a2D9f13947e4023317904A38Bd35dB9e",
+      "version": "1.0.0"
+    },
+    {
+      "name": "source",
+      "endpoint": "https://github.com/spagero763/visaproof",
+      "version": "1.0.0"
+    }
+  ],
+  "x402Support": false,
+  "active": true,
+  "supportedTrust": [
+    "reputation"
+  ]
+}

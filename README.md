@@ -64,6 +64,21 @@ Live on Celo mainnet (chain id 42220), all four contracts verified on Celoscan.
 | `AgentPassport` | [`0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3`](https://celoscan.io/address/0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3#code) |
 | `AgentVisaRegistry` | [`0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837`](https://celoscan.io/address/0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837#code) |
 
+## Identity
+
+VisaProof is registered as an [ERC 8004 agent identity](https://eips.ethereum.org/EIPS/eip-8004)
+on Celo mainnet.
+
+| Field | Value |
+|-------|-------|
+| Registry | [`0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`](https://celoscan.io/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=9187) |
+| Agent id | `9187` |
+| Agent URI | [`ipfs://bafkreid6ht2mvp2rq7t7ujtpodnoymekyfxtdxgzicpohwdpjusszltlha`](https://gateway.pinata.cloud/ipfs/bafkreid6ht2mvp2rq7t7ujtpodnoymekyfxtdxgzicpohwdpjusszltlha) |
+
+The registration JSON in `registration.json` lists each VisaProof contract as
+an entry in the agent's services array, so off chain indexers can discover the
+full stack from a single identity.
+
 ## Local development
 
 ```bash
