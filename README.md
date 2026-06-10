@@ -11,7 +11,9 @@ from fixed public thresholds.
 ## How it works
 
 1. The controller of an ERC 8004 agent identity registers a passport for that
-   agent id.
+   agent id, presenting a Self Agent ID they also control. The passport is
+   bound to that Self Agent ID's human nullifier, so every VisaProof identity
+   traces back to a verified human (see [Proof of human](#proof-of-human)).
 2. The controller submits transaction hashes, amounts and token addresses to
    the activity oracle. Each hash is recorded once globally so the same
    transaction cannot be counted twice, and every amount is converted to a
@@ -23,6 +25,26 @@ from fixed public thresholds.
 
 Every write is gated by ownership of the agent's ERC 8004 identity NFT, so an
 agent's record can only be managed by the address that controls its identity.
+
+## Proof of human
+
+Passport registration is Sybil resistant. To register, the controller must also
+own a [Self Agent ID](https://selfagentid.xyz) — a soulbound identity backed by a
+Self Protocol zero knowledge passport proof — that carries a fresh proof of human.
+`AgentPassport` reads the Self Agent ID registry on Celo mainnet and requires:
+
+* the caller owns the supplied Self Agent ID,
+* it has a human proof that is currently fresh (proofs expire and can be revoked),
+
+then records that human's nullifier on the passport. Self performs all zero
+knowledge verification; VisaProof only consumes the on-chain result, so no proof
+plumbing lives in the protocol. `humanProof(agentId)` re-reads the live status at
+any time. One human may control passports for several agents, but every passport
+is anchored to a real, verified person.
+
+| Field | Value |
+|-------|-------|
+| Self Agent ID registry | [`0xaC3DF9ABf80d0F5c020C06B04Cced27763355944`](https://celoscan.io/address/0xaC3DF9ABf80d0F5c020C06B04Cced27763355944) (symbol `SAID`) |
 
 ## Tiers
 
@@ -38,7 +60,7 @@ A tier is reached by meeting either threshold, transaction count or cUSD volume.
 
 | Contract | Role |
 |----------|------|
-| `AgentPassport.sol` | Maps each ERC 8004 agent id to its Visa tier and passport record, and recomputes the tier from verified activity. |
+| `AgentPassport.sol` | Maps each ERC 8004 agent id to its Visa tier and passport record, gates registration on a Self Agent ID proof of human, and recomputes the tier from verified activity. |
 | `AgentActivityOracle.sol` | Records non duplicated transaction hashes, aggregates multi token volume into a single cUSD score per agent. |
 | `MentoPriceAdapter.sol` | Prices supported tokens into cUSD. USD pegged stables convert one to one with decimal normalisation, Mento stables route through CELO via the SortedOracles feed. |
 | `AgentVisaRegistry.sol` | Visa applications, tier filtered leaderboard, and a keyword index for agent discovery. |
@@ -63,6 +85,11 @@ Live on Celo mainnet (chain id 42220), all four contracts verified on Celoscan.
 | `AgentActivityOracle` | [`0x791d94586187d3239cEB0577FE02af7eb9f8eF25`](https://celoscan.io/address/0x791d94586187d3239cEB0577FE02af7eb9f8eF25#code) |
 | `AgentPassport` | [`0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3`](https://celoscan.io/address/0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3#code) |
 | `AgentVisaRegistry` | [`0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837`](https://celoscan.io/address/0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837#code) |
+
+The live `AgentPassport` above is the pre–proof-of-human version. The
+[Self Agent ID gate](#proof-of-human) ships in a v2 redeploy of `AgentPassport`
+(and the `AgentVisaRegistry` wired to it); redeploy with `script/Deploy.s.sol`
+and update this table plus the SDK's `passport` address afterwards.
 
 ## Identity
 
@@ -119,9 +146,25 @@ Because Celo supports CIP 64 fee abstraction, the deploy and every protocol
 call can pay gas in cUSD by setting the fee currency at the transaction layer.
 No contract change is needed for this.
 
-## Roadmap
+## TypeScript SDK
 
-* `@visaproof/sdk`, a TypeScript wrapper over the deployed contracts.
+[`@visaproof/sdk`](sdk/) is a typed [viem](https://viem.sh) wrapper over the
+deployed contracts. Reads need no signer; pass an `account` to register, submit
+activity, upgrade tiers and apply.
+
+```ts
+import { VisaProof } from "@visaproof/sdk";
+
+const vp = new VisaProof({ rpcUrl, account: AGENT_KEY, agentId: 9187n });
+
+await vp.registerAgent({ selfAgentId: 42n });
+await vp.submitActivity({ txHashes, amounts, tokens: ["cUSD", "USDT"] });
+const { tierName, volumeCUSD } = await vp.getPassport();
+const top = await vp.getLeaderboard({ minTier: "WorkVisa", limit: 10 });
+```
+
+See [sdk/README.md](sdk/README.md) for the full API. Build it with
+`cd sdk && npm install && npm run build`.
 
 ## License
 

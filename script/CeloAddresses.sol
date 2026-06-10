@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.24;
+pragma solidity 0.8.28;
 
 /// @title CeloAddresses
 /// @notice Canonical Celo mainnet addresses consumed by the deploy script.
@@ -13,6 +13,11 @@ pragma solidity 0.8.24;
 library CeloAddresses {
     address internal constant SORTED_ORACLES = 0xefB84935239dAcdecF7c5bA76d8dE40b077B7b33;
     address internal constant IDENTITY_REGISTRY = 0x8004A169FB4a3325136EB29fA0ceB6D2e539a432;
+
+    /// @dev Self Agent ID registry (name "Self Agent ID", symbol "SAID"), an
+    ///      ERC 1967 proxy. Soulbound ERC 721 binding agents to Self Protocol
+    ///      proofs of human; read by AgentPassport to gate passport registration.
+    address internal constant SELF_AGENT_REGISTRY = 0xaC3DF9ABf80d0F5c020C06B04Cced27763355944;
 
     address internal constant cUSD = 0x765DE816845861e75A25fCA122bb6898B8B1282a;
     address internal constant cEUR = 0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73;

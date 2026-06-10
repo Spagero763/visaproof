@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.24;
+pragma solidity 0.8.28;
 
 import {Script, console2} from "forge-std/Script.sol";
 import {MentoPriceAdapter} from "../src/MentoPriceAdapter.sol";
@@ -73,8 +73,9 @@ contract Deploy is Script {
         oracle.setSupportedToken(CeloAddresses.USDT, true);
         oracle.setSupportedToken(CeloAddresses.USDC, true);
 
-        // 3. Passport. Reads verified activity for tier computation.
-        passport = new AgentPassport(CeloAddresses.IDENTITY_REGISTRY, address(oracle));
+        // 3. Passport. Reads verified activity for tier computation and gates
+        //    registration on a fresh Self Agent ID proof of human.
+        passport = new AgentPassport(CeloAddresses.IDENTITY_REGISTRY, address(oracle), CeloAddresses.SELF_AGENT_REGISTRY);
 
         // 4. Registry. Coordinates applications, leaderboard and discovery.
         registry = new AgentVisaRegistry(address(passport), CeloAddresses.IDENTITY_REGISTRY, address(oracle));

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.24;
+pragma solidity 0.8.28;
 
 import {Test} from "forge-std/Test.sol";
 import {AgentVisaRegistry} from "../src/AgentVisaRegistry.sol";
-import {AgentPassport, IIdentityRegistry, IActivityOracle} from "../src/AgentPassport.sol";
+import {AgentPassport, IIdentityRegistry, IActivityOracle, ISelfAgentRegistry} from "../src/AgentPassport.sol";
 
 /// @dev Mock ERC 8004 identity registry. Maps agent id to its controller.
 contract MockIdentityRegistry is IIdentityRegistry {
@@ -42,11 +42,38 @@ contract MockActivityOracle is IActivityOracle {
     }
 }
 
+/// @dev Mock Self Agent ID registry: every passed selfAgentId resolves to a
+///      fresh human controlled by its registered owner.
+contract MockSelfAgentRegistry is ISelfAgentRegistry {
+    mapping(uint256 => address) public owners;
+
+    function setOwner(uint256 selfAgentId, address owner) external {
+        owners[selfAgentId] = owner;
+    }
+
+    function ownerOf(uint256 selfAgentId) external view returns (address) {
+        return owners[selfAgentId];
+    }
+
+    function hasHumanProof(uint256) external pure returns (bool) {
+        return true;
+    }
+
+    function isProofFresh(uint256) external pure returns (bool) {
+        return true;
+    }
+
+    function getHumanNullifier(uint256 selfAgentId) external pure returns (uint256) {
+        return selfAgentId;
+    }
+}
+
 contract AgentVisaRegistryTest is Test {
     AgentVisaRegistry internal reg;
     AgentPassport internal passport;
     MockIdentityRegistry internal identity;
     MockActivityOracle internal oracle;
+    MockSelfAgentRegistry internal self;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
@@ -63,7 +90,8 @@ contract AgentVisaRegistryTest is Test {
     function setUp() public {
         identity = new MockIdentityRegistry();
         oracle = new MockActivityOracle();
-        passport = new AgentPassport(address(identity), address(oracle));
+        self = new MockSelfAgentRegistry();
+        passport = new AgentPassport(address(identity), address(oracle), address(self));
         reg = new AgentVisaRegistry(address(passport), address(identity), address(oracle));
 
         identity.setOwner(A, alice);
@@ -359,8 +387,10 @@ contract AgentVisaRegistryTest is Test {
     // -----------------------------------------------------------------
 
     function _registerPassport(address controller, uint256 agentId) internal {
+        // Bind a Self Agent ID (reusing the agent id) owned by the controller.
+        self.setOwner(agentId, controller);
         vm.prank(controller);
-        passport.registerAgent(agentId);
+        passport.registerAgent(agentId, agentId);
     }
 
     function _apply(address controller, uint256 agentId) internal {
