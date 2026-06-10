@@ -3,10 +3,9 @@ import type { Address } from "viem";
 /**
  * Deployed VisaProof contract addresses on Celo mainnet (chain id 42220).
  *
- * NOTE: these point at the live VisaProof stack. The Self Agent ID gate
- * (`registerAgent(agentId, selfAgentId)`) ships in the v2 redeploy; update
- * `passport` here to the v2 address once it is deployed, or pass `contracts`
- * to the {@link VisaProof} constructor to override any address.
+ * This is the proof-of-human v2 stack: `AgentPassport.registerAgent(agentId,
+ * selfAgentId)` is gated on a Self Agent ID. Pass `contracts` to the
+ * {@link VisaProof} constructor to override any address (e.g. a local fork).
  */
 export interface VisaProofContracts {
   /** AgentPassport — tier tracker, gated on a Self Agent ID proof of human. */
@@ -22,10 +21,10 @@ export interface VisaProofContracts {
 export const CELO_MAINNET_ID = 42220 as const;
 
 export const CELO_MAINNET: VisaProofContracts = {
-  passport: "0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3",
-  activityOracle: "0x791d94586187d3239cEB0577FE02af7eb9f8eF25",
-  visaRegistry: "0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837",
-  priceAdapter: "0x28825CB6a2D9f13947e4023317904A38Bd35dB9e",
+  passport: "0x665EB52aE88C0927daB1eF1ff47B030dbB9C6180",
+  activityOracle: "0x5eDA6AAB3df76c5A9876C9e6e76321B23f7fE9a4",
+  visaRegistry: "0x4Bba05eC290b3AA3C9E7831fBC4A713E3340827F",
+  priceAdapter: "0xD6c7DE4E408b157d0284F4D927980b5b302C5880",
 };
 
 /** ERC-8004 identity registry VisaProof keys agents on ("AgentIdentity"/"AGENT"). */

@@ -81,15 +81,14 @@ Live on Celo mainnet (chain id 42220), all four contracts verified on Celoscan.
 
 | Contract | Address |
 |----------|---------|
-| `MentoPriceAdapter` | [`0x28825CB6a2D9f13947e4023317904A38Bd35dB9e`](https://celoscan.io/address/0x28825CB6a2D9f13947e4023317904A38Bd35dB9e#code) |
-| `AgentActivityOracle` | [`0x791d94586187d3239cEB0577FE02af7eb9f8eF25`](https://celoscan.io/address/0x791d94586187d3239cEB0577FE02af7eb9f8eF25#code) |
-| `AgentPassport` | [`0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3`](https://celoscan.io/address/0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3#code) |
-| `AgentVisaRegistry` | [`0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837`](https://celoscan.io/address/0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837#code) |
+| `MentoPriceAdapter` | [`0xD6c7DE4E408b157d0284F4D927980b5b302C5880`](https://celoscan.io/address/0xD6c7DE4E408b157d0284F4D927980b5b302C5880#code) |
+| `AgentActivityOracle` | [`0x5eDA6AAB3df76c5A9876C9e6e76321B23f7fE9a4`](https://celoscan.io/address/0x5eDA6AAB3df76c5A9876C9e6e76321B23f7fE9a4#code) |
+| `AgentPassport` | [`0x665EB52aE88C0927daB1eF1ff47B030dbB9C6180`](https://celoscan.io/address/0x665EB52aE88C0927daB1eF1ff47B030dbB9C6180#code) |
+| `AgentVisaRegistry` | [`0x4Bba05eC290b3AA3C9E7831fBC4A713E3340827F`](https://celoscan.io/address/0x4Bba05eC290b3AA3C9E7831fBC4A713E3340827F#code) |
 
-The live `AgentPassport` above is the pre–proof-of-human version. The
-[Self Agent ID gate](#proof-of-human) ships in a v2 redeploy of `AgentPassport`
-(and the `AgentVisaRegistry` wired to it); redeploy with `script/Deploy.s.sol`
-and update this table plus the SDK's `passport` address afterwards.
+`AgentPassport` here is the proof-of-human v2: registration is gated on a
+[Self Agent ID](#proof-of-human). An earlier pre-gate stack was deployed at
+different addresses and is superseded by the contracts above.
 
 ## Identity
 

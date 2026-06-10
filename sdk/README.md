@@ -83,9 +83,9 @@ the `contracts` option — for example to target a local fork or a new deploymen
 const vp = new VisaProof({ rpcUrl, contracts: { passport: "0x…" } });
 ```
 
-> The `registerAgent(agentId, selfAgentId)` signature and the 7-field passport struct
-> belong to the Self-gated v2 deployment. Point `contracts.passport` at the v2 address
-> once it is live.
+The bundled addresses are the live proof-of-human v2 stack on Celo mainnet —
+`registerAgent(agentId, selfAgentId)` and the 7-field passport struct match the
+deployed `AgentPassport`.
 
 ## License
 
