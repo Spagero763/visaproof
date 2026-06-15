@@ -7,19 +7,19 @@ import { VisaProof, CELO_MAINNET, visaRegistryAbi } from "visaproof-sdk";
 const vp = new VisaProof({ rpcUrl: "https://forno.celo.org" });
 
 const contracts = [
-  { name: "AgentPassport", role: "Tier per agent, gated on a Self Agent ID proof of human.", address: CELO_MAINNET.passport },
-  { name: "AgentActivityOracle", role: "Records tx hashes, aggregates multi-stablecoin volume into cUSD.", address: CELO_MAINNET.activityOracle },
-  { name: "AgentVisaRegistry", role: "Applications, leaderboard, and capability discovery.", address: CELO_MAINNET.visaRegistry },
-  { name: "MentoPriceAdapter", role: "Prices supported tokens into cUSD via the Mento oracle.", address: CELO_MAINNET.priceAdapter },
+  { name: "AgentPassport", role: "Holds each agent's tier. You need a Self Agent ID to open one.", address: CELO_MAINNET.passport },
+  { name: "AgentActivityOracle", role: "Records transactions and adds up volume across stablecoins in cUSD.", address: CELO_MAINNET.activityOracle },
+  { name: "AgentVisaRegistry", role: "Visa applications, the leaderboard, and agent discovery.", address: CELO_MAINNET.visaRegistry },
+  { name: "MentoPriceAdapter", role: "Prices each token into cUSD using the Mento oracle.", address: CELO_MAINNET.priceAdapter },
 ];
 
 const integrations = ["ERC-8004 Identity", "Self Agent ID", "Mento Oracle", "CIP-64 gas in cUSD"];
 
 const steps = [
-  { n: "1", t: "Prove you are human", d: "A passport can only be created by an address that controls a Self Agent ID with a live proof of human." },
-  { n: "2", t: "Report activity", d: "Submit transaction hashes and amounts. The oracle counts each once and prices volume into cUSD." },
-  { n: "3", t: "Tier computed on-chain", d: "Tourist, Work Visa, or Citizenship is derived from fixed public thresholds. No manual review." },
-  { n: "4", t: "Be discoverable", d: "Tier and capabilities are posted to a public leaderboard so other agents can find and hire you." },
+  { n: "1", t: "Prove a human is behind it", d: "You can only open a passport if you hold a Self Agent ID, which proves a real person controls the agent." },
+  { n: "2", t: "Report activity", d: "Send the transactions you want counted. Each one is counted once and the volume is priced into cUSD." },
+  { n: "3", t: "Tier is worked out on-chain", d: "Tourist, Work Visa or Citizenship, from fixed public numbers. No one reviews it by hand." },
+  { n: "4", t: "Get found", d: "Your tier and skills go on a public leaderboard, so other agents can find you." },
 ];
 
 const scan = (a: string) => `https://celoscan.io/address/${a}#code`;
@@ -93,10 +93,9 @@ export default function Home() {
         </div>
         <h1>VisaProof</h1>
         <p className="tag">
-          The on-chain qualification layer for Celo's agent economy. Any AI agent
-          can prove, track, and signal its Agent Visa tier from verifiable
-          activity, gated on a Self Agent ID proof of human so the reputation
-          cannot be farmed.
+          VisaProof works out whether an AI agent qualifies for Celo's Agent
+          Visa, and proves it on-chain. You can only open a passport if a real
+          human is behind the agent, so the score cannot be farmed.
         </p>
         <div className="links">
           <a className="btn" href="https://github.com/Spagero763/visaproof">GitHub</a>
@@ -176,11 +175,10 @@ export default function Home() {
       <section className="card accent">
         <h2>Why it cannot be farmed</h2>
         <p>
-          Every passport is bound to a Self Agent ID human nullifier. The Self
-          registry caps how many agents one human can hold and de-duplicates by
-          that nullifier, so activity always traces back to a real, unique
-          person. This is what makes the Visa qualification trustworthy rather
-          than gameable.
+          Every passport is tied to a Self Agent ID, which proves a real person.
+          The Self registry limits how many agents one human can hold, so the
+          activity behind a tier always belongs to someone real. That is what
+          stops the leaderboard from being filled with bots.
         </p>
       </section>
 
@@ -201,7 +199,7 @@ export default function Home() {
 
       <section className="card">
         <h2>For builders</h2>
-        <p className="muted">Integrate in a few lines with the published SDK.</p>
+        <p className="muted">Plug in with a few lines using the SDK.</p>
         <pre>
 {`import { VisaProof } from "visaproof-sdk";
 
@@ -215,8 +213,8 @@ const top = await vp.getLeaderboard({ minTier: "WorkVisa", limit: 10 });`}
       </section>
 
       <footer>
-        VisaProof reads live from Celo mainnet via the visaproof-sdk package.
-        Open source, MIT.
+        Reads live from Celo mainnet through the visaproof-sdk package. Open
+        source, MIT.
       </footer>
     </main>
   );
