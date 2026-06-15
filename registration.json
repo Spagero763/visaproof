@@ -5,23 +5,23 @@
   "services": [
     {
       "name": "registry",
-      "endpoint": "eip155:42220:0x1148F21399Fc79435f7FA4081Ccfea6Ff89b8837",
-      "version": "1.0.0"
+      "endpoint": "eip155:42220:0x4Bba05eC290b3AA3C9E7831fBC4A713E3340827F",
+      "version": "2.0.0"
     },
     {
       "name": "passport",
-      "endpoint": "eip155:42220:0x1378Ec1Dc2b5c095077c3437588a555F9705AFc3",
-      "version": "1.0.0"
+      "endpoint": "eip155:42220:0x665EB52aE88C0927daB1eF1ff47B030dbB9C6180",
+      "version": "2.0.0"
     },
     {
       "name": "activity-oracle",
-      "endpoint": "eip155:42220:0x791d94586187d3239cEB0577FE02af7eb9f8eF25",
-      "version": "1.0.0"
+      "endpoint": "eip155:42220:0x5eDA6AAB3df76c5A9876C9e6e76321B23f7fE9a4",
+      "version": "2.0.0"
     },
     {
       "name": "price-adapter",
-      "endpoint": "eip155:42220:0x28825CB6a2D9f13947e4023317904A38Bd35dB9e",
-      "version": "1.0.0"
+      "endpoint": "eip155:42220:0xD6c7DE4E408b157d0284F4D927980b5b302C5880",
+      "version": "2.0.0"
     },
     {
       "name": "source",
