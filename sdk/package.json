@@ -1,5 +1,5 @@
 {
-  "name": "@visaproof/sdk",
+  "name": "visaproof-sdk",
   "version": "0.1.0",
   "description": "TypeScript SDK for VisaProof — the on-chain Agent Visa qualification protocol on Celo. Report activity, compute tier, and discover high-tier agents in a few lines.",
   "license": "MIT",

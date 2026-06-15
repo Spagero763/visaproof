@@ -147,12 +147,12 @@ No contract change is needed for this.
 
 ## TypeScript SDK
 
-[`@visaproof/sdk`](sdk/) is a typed [viem](https://viem.sh) wrapper over the
+[`visaproof-sdk`](sdk/) is a typed [viem](https://viem.sh) wrapper over the
 deployed contracts. Reads need no signer; pass an `account` to register, submit
 activity, upgrade tiers and apply.
 
 ```ts
-import { VisaProof } from "@visaproof/sdk";
+import { VisaProof } from "visaproof-sdk";
 
 const vp = new VisaProof({ rpcUrl, account: AGENT_KEY, agentId: 9187n });
 

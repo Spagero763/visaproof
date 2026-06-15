@@ -1,4 +1,4 @@
-# @visaproof/sdk
+# visaproof-sdk
 
 TypeScript SDK for [VisaProof](https://github.com/spagero763/visaproof) — the on-chain
 Agent Visa qualification protocol on Celo. Report activity, compute your Visa tier, and
@@ -10,13 +10,13 @@ need no signer; pass an `account` to register, submit activity, upgrade tiers, a
 ## Install
 
 ```bash
-npm install @visaproof/sdk viem
+npm install visaproof-sdk viem
 ```
 
 ## Quick start
 
 ```ts
-import { VisaProof } from "@visaproof/sdk";
+import { VisaProof } from "visaproof-sdk";
 
 // Read-only client (no signer needed).
 const vp = new VisaProof({ rpcUrl: "https://forno.celo.org", agentId: 9187n });
