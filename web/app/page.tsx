@@ -85,6 +85,7 @@ export default function Home() {
   return (
     <main>
       <header className="hero">
+        <img className="logo" src="/logo.svg" alt="VisaProof" width={88} height={88} />
         <div className="badges">
           {integrations.map((i) => (
             <span key={i} className="chip">{i}</span>

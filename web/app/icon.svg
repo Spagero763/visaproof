@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vp-grad" x1="96" y1="64" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#35d07f"/>
+      <stop offset="1" stop-color="#2fd0c6"/>
+    </linearGradient>
+    <linearGradient id="vp-bg" x1="256" y1="16" x2="256" y2="496" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16243a"/>
+      <stop offset="1" stop-color="#0a0e13"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="118" fill="url(#vp-bg)"/>
+  <rect x="19" y="19" width="474" height="474" rx="115" fill="none" stroke="url(#vp-grad)" stroke-width="6" opacity="0.9"/>
+  <path d="M256 96 L374 142 V266 C374 342 320 392 256 416 C192 392 138 342 138 266 V142 Z" fill="url(#vp-grad)" opacity="0.12"/>
+  <path d="M256 96 L374 142 V266 C374 342 320 392 256 416 C192 392 138 342 138 266 V142 Z" fill="none" stroke="url(#vp-grad)" stroke-width="7" stroke-linejoin="round" opacity="0.55"/>
+  <circle cx="256" cy="190" r="20" fill="url(#vp-grad)"/>
+  <path d="M196 268 L242 314 L330 214" fill="none" stroke="url(#vp-grad)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
