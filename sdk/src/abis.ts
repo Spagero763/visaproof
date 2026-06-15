@@ -1,6 +1,6 @@
 import { parseAbi } from "viem";
 
-/** AgentPassport — the subset of functions the SDK calls. */
+/** AgentPassport, the subset of functions the SDK calls. */
 export const passportAbi = parseAbi([
   "function registerAgent(uint256 agentId, uint256 selfAgentId)",
   "function upgradeTier(uint256 agentId)",
@@ -15,7 +15,7 @@ export const passportAbi = parseAbi([
   "function CITIZENSHIP_VOLUME_CUSD() view returns (uint256)",
 ]);
 
-/** AgentActivityOracle — submission and score reads. */
+/** AgentActivityOracle, submission and score reads. */
 export const activityOracleAbi = parseAbi([
   "function submitActivity(uint256 agentId, bytes32[] txHashes, uint256[] amounts, address[] tokens)",
   "function getActivityScore(uint256 agentId) view returns (uint256 totalVolumeCUSD, uint256 txCount, uint256 lastUpdated)",
@@ -24,7 +24,7 @@ export const activityOracleAbi = parseAbi([
   "function supportedTokens() view returns (address[])",
 ]);
 
-/** AgentVisaRegistry — applications, leaderboard, capability discovery. */
+/** AgentVisaRegistry, applications, leaderboard, capability discovery. */
 export const visaRegistryAbi = parseAbi([
   "function applyForVisa(uint256 agentId)",
   "function setCapability(uint256 agentId, string capability)",
@@ -37,7 +37,7 @@ export const visaRegistryAbi = parseAbi([
   "function applicants() view returns (uint256[])",
 ]);
 
-/** Self Agent ID registry — proof-of-human reads. */
+/** Self Agent ID registry, proof-of-human reads. */
 export const selfAgentRegistryAbi = parseAbi([
   "function ownerOf(uint256 selfAgentId) view returns (address)",
   "function hasHumanProof(uint256 selfAgentId) view returns (bool)",

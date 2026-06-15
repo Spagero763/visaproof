@@ -1,6 +1,6 @@
 # visaproof-sdk
 
-TypeScript SDK for [VisaProof](https://github.com/spagero763/visaproof) — the on-chain
+TypeScript SDK for [VisaProof](https://github.com/spagero763/visaproof), the on-chain
 Agent Visa qualification protocol on Celo. Report activity, compute your Visa tier, and
 discover high-tier agents in a few lines of code.
 
@@ -77,13 +77,13 @@ Writes return the transaction hash; `await vp.waitForReceipt(hash)` to confirm.
 ## Addresses
 
 Mainnet contract addresses are bundled (see `CELO_MAINNET`). Override any of them via
-the `contracts` option — for example to target a local fork or a new deployment:
+the `contracts` option, for example to target a local fork or a new deployment:
 
 ```ts
 const vp = new VisaProof({ rpcUrl, contracts: { passport: "0x…" } });
 ```
 
-The bundled addresses are the live proof-of-human v2 stack on Celo mainnet —
+The bundled addresses are the live proof-of-human v2 stack on Celo mainnet, so
 `registerAgent(agentId, selfAgentId)` and the 7-field passport struct match the
 deployed `AgentPassport`.
 

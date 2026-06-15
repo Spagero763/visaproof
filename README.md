@@ -29,8 +29,8 @@ agent's record can only be managed by the address that controls its identity.
 ## Proof of human
 
 Passport registration is Sybil resistant. To register, the controller must also
-own a [Self Agent ID](https://selfagentid.xyz) — a soulbound identity backed by a
-Self Protocol zero knowledge passport proof — that carries a fresh proof of human.
+own a [Self Agent ID](https://selfagentid.xyz), a soulbound identity backed by a
+Self Protocol zero knowledge passport proof, that carries a fresh proof of human.
 `AgentPassport` reads the Self Agent ID registry on Celo mainnet and requires:
 
 * the caller owns the supplied Self Agent ID,

@@ -1,17 +1,17 @@
-// VisaProof — honest activity seeder.
+// VisaProof, honest activity seeder.
 //
 // Exercises the live protocol end to end with REAL on-chain transactions:
 // registers a passport (gated on your Self Agent ID), makes real cUSD
 // transfers, submits those real tx hashes to the activity oracle, applies for
 // a visa, declares a capability, and reads everything back. Every call is a
-// genuine mainnet transaction a reviewer can click on Celoscan — no synthetic
+// genuine mainnet transaction a reviewer can click on Celoscan, no synthetic
 // hashes, no wash trading.
 //
 // Runs each transaction sequentially (waits for every receipt before the next)
 // so it is safe for an EIP-7702 delegated deployer on Celo's sequencer.
 //
 // Usage (from the sdk/ directory, after `npm run build`):
-//   export PRIVATE_KEY=0x...        # your deployer key, LOCAL ONLY — never commit
+//   export PRIVATE_KEY=0x...        # your deployer key, LOCAL ONLY, never commit
 //   export CELO_RPC_URL=https://forno.celo.org
 //   export TRANSFERS=25             # how many real transfers to make (optional)
 //   node examples/seed-activity.mjs
@@ -66,7 +66,7 @@ async function step(label, fn) {
     }
     return hash;
   } catch (err) {
-    console.log(`  !!  ${label} — ${err.shortMessage || err.message}`);
+    console.log(`  !!  ${label}, ${err.shortMessage || err.message}`);
     return undefined;
   }
 }

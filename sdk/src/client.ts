@@ -73,7 +73,7 @@ function toBigInt(v: Numeric): bigint {
 }
 
 /**
- * VisaProof — a thin, typed wrapper over the on-chain Agent Visa qualification
+ * VisaProof, a thin, typed wrapper over the on-chain Agent Visa qualification
  * protocol on Celo. Read tier/activity with no signer; pass an `account` to
  * register, submit activity, upgrade tiers and apply for a visa.
  *
@@ -341,7 +341,7 @@ export class VisaProof {
     args: readonly unknown[],
   ): Promise<Hash> {
     if (!this.wallet || !this.account) {
-      throw new Error("This call needs a signer — construct VisaProof with an `account`");
+      throw new Error("This call needs a signer, construct VisaProof with an `account`");
     }
     return this.wallet.writeContract({
       address,

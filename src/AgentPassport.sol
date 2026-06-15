@@ -137,8 +137,8 @@ contract AgentPassport {
     ///                     Self Protocol proof of human.
     /// @dev Sybil resistance: the passport is bound to the Self Agent ID's human
     ///      nullifier, so every VisaProof identity traces back to a verified
-    ///      human. The caller must control both identities — the ERC 8004 agent
-    ///      NFT and the Self Agent ID — and the human proof must be live.
+    ///      human. The caller must control both identities, the ERC 8004 agent
+    ///      NFT and the Self Agent ID, and the human proof must be live.
     function registerAgent(uint256 agentId, uint256 selfAgentId) external {
         _requireAgentOwner(agentId);
         if (_passports[agentId].registered) revert AlreadyRegistered(agentId);

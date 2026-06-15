@@ -8,13 +8,13 @@ import type { Address } from "viem";
  * {@link VisaProof} constructor to override any address (e.g. a local fork).
  */
 export interface VisaProofContracts {
-  /** AgentPassport — tier tracker, gated on a Self Agent ID proof of human. */
+  /** AgentPassport, tier tracker, gated on a Self Agent ID proof of human. */
   passport: Address;
-  /** AgentActivityOracle — records tx hashes, aggregates multi-token volume. */
+  /** AgentActivityOracle, records tx hashes, aggregates multi-token volume. */
   activityOracle: Address;
-  /** AgentVisaRegistry — applications, leaderboard, capability discovery. */
+  /** AgentVisaRegistry, applications, leaderboard, capability discovery. */
   visaRegistry: Address;
-  /** MentoPriceAdapter — prices supported tokens into cUSD. */
+  /** MentoPriceAdapter, prices supported tokens into cUSD. */
   priceAdapter: Address;
 }
 
